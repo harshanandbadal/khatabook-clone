@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-blue-600">My Customers</h1>
+            <a href="/logout" class="text-red-500">Logout</a>
+        </div>
+
+        <form action="/add-customer" method="POST" class="flex gap-2 mb-6">
+            <input type="text" name="name" placeholder="Customer Name" required class="border p-2 rounded flex-1">
+            <input type="text" name="phone" placeholder="Phone Number" class="border p-2 rounded flex-1">
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded px-4">Add Customer</button>
+        </form>
+
+        <div>
+            <% customers.forEach(function(customer) { %>
+                <a href="/customer/<%= customer.id %>" class="block border-b p-4 hover:bg-gray-50 flex justify-between">
+                    <div>
+                        <h2 class="font-bold text-lg"><%= customer.name %></h2>
+                        <p class="text-gray-500 text-sm"><%= customer.phone %></p>
+                    </div>
+                    <div class="text-blue-500 font-bold mt-2">View Ledger ➔</div>
+                </a>
+            <% }); %>
+            <% if(customers.length === 0) { %>
+                <p class="text-gray-500 text-center py-4">No customers added yet.</p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
